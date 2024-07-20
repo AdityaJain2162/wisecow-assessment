@@ -6,11 +6,47 @@ This document outlines the steps to deploy the Wisecow application on a local Ku
 
 ## Prerequisites
 
-- **Minikube**: A local Kubernetes cluster.
-- **kubectl**: Kubernetes command-line tool.
-- **OpenSSL**: For generating self-signed certificates.
-- **Docker**: For containerization.
+1. **Docker**: Ensure Docker is installed on your local machine. Install Docker from [Docker's official website](https://www.docker.com/products/docker-desktop).
+2. **Docker Hub Account**: Create an account on Docker Hub at [Docker Hub](https://hub.docker.com/).
+3. **Kubernetes with Minikube**: Install Minikube and kubectl. Follow [Minikube’s installation guide](https://minikube.sigs.k8s.io/docs/start/) if necessary.
+4. **GitHub Account**: Create an account on GitHub at [GitHub](https://github.com/).
 
+### Create a Dockerfile
+Create a `Dockerfile` with the following content:
+
+```Dockerfile
+FROM debian:latest
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Install required packages, including Netcat
+RUN apt-get update && \
+    apt-get install -y \
+    fortune-mod \
+    cowsay \
+    netcat-openbsd \
+    dos2unix \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the shell script into the container
+COPY wisecow.sh /app/wisecow.sh
+
+# Convert line endings from CRLF to LF
+RUN dos2unix /app/wisecow.sh
+
+# Make the script executable
+RUN chmod +x /app/wisecow.sh
+
+# Update PATH to include /usr/games
+ENV PATH="/usr/games:${PATH}"
+
+# Example Dockerfile snippet
+EXPOSE 4499
+
+# Specify the default command to run the script
+ENTRYPOINT ["/app/wisecow.sh"]
+```
 ## Steps
 
 ### 1. Set Up Minikube
@@ -43,7 +79,7 @@ This document outlines the steps to deploy the Wisecow application on a local Ku
 2. **Create a Kubernetes Secret for TLS**
 
    ```bash
-   kubectl create secret tls tls-secret --cert=tls.crt --key=tls.key
+   kubectl create secret tls tls-secret --cert=cert/tls.crt --key=cert/tls.key
    ```
 
 ### 3. Create Kubernetes Manifests
@@ -151,7 +187,7 @@ This document outlines the steps to deploy the Wisecow application on a local Ku
    ```bash
    kubectl get pods
    ```
-   
+
    Ensure all pods are running and have the `READY` status.
 
 2. **Check Service Status**
