@@ -129,13 +129,12 @@ This document outlines the steps to deploy the Wisecow application on a local Ku
 
 ### 5. Access the Application
 
-1. **Get the Ingress URL**
+1. **Forward the Ingress controller port to access the application with TLS:**
 
    ```bash
-   minikube service wisecow-service --url
+   kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8443:443
    ```
-
-   This command will provide you with an HTTP URL. Use this URL to access the service locally. 
+   Open https://localhost:8443 in your web browser. You may need to accept the self-signed certificate warning. 
 
 2. **Verify Ingress**
 
@@ -152,7 +151,7 @@ This document outlines the steps to deploy the Wisecow application on a local Ku
    ```bash
    kubectl get pods
    ```
-
+   
    Ensure all pods are running and have the `READY` status.
 
 2. **Check Service Status**
