@@ -27,7 +27,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/wisecow:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/wisecow_image:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,6 +47,6 @@ jobs:
         mkdir -p $HOME/.kube
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
-    - name: Apply Kubernetes manifests
+    - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f k8s/
+        kubectl set image deployment/wisecow-deployment wisecow=${{ secrets.DOCKERHUB_USERNAME }}/wisecow_image:latest
