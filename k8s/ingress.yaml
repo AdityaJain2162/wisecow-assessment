@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: wisecow-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
   rules:
   - host: localhost.vm.adityajain2162.ksdns.io
