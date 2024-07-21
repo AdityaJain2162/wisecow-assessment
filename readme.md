@@ -158,9 +158,7 @@ ENTRYPOINT ["/app/wisecow.sh"]
 1. **Apply the Manifests**
 
    ```bash
-   kubectl apply -f deployment.yaml
-   kubectl apply -f service.yaml
-   kubectl apply -f ingress.yaml
+    kubectl apply -f k8s/
    ```
 
 ### 5. Access the Application
