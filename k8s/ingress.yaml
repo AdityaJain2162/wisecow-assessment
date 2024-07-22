@@ -9,7 +9,7 @@ spec:
     - localhost
     secretName: tls-secret
   rules:
-  - host: 10.0.0.4
+  - host: vm.adityajain2162.local.kubegateway.com
     http:
       paths:
       - path: /
