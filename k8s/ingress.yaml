@@ -1,4 +1,3 @@
-# ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -6,7 +5,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - localhost
+    - vm.adityajain2162.ksdns.io
     secretName: tls-secret
   rules:
   - host: vm.adityajain2162.ksdns.io
