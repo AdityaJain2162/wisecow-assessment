@@ -11,7 +11,7 @@ spec:
         - vm.adityajain2162.ksdns.io
       secretName: wisecow-tls
   rules:
-    - host: vm.adityajain2162.ksdns.io
+    - host: local.vm.adityajain2162.use1.kubegateway.com
       http:
         paths:
           - path: /
