@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: domain-ingress
@@ -7,9 +7,13 @@ spec:
     - host: vm.adityajain2162.ksdns.io
       http:
         paths:
-          - backend:
-              serviceName: wisecow-service
-              servicePort: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port:
+                  number: 80
   tls:
     - hosts:
         - vm.adityajain2162.ksdns.io
