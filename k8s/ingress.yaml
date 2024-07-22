@@ -1,21 +1,20 @@
-# ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: wisecow-ingress
+  name: domain-ingress
 spec:
-  tls:
-  - hosts:
-    - localhost
-    secretName: tls-secret
   rules:
-  - host: localhost
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wisecow-service
-            port:
-              number: 80
+    - host: vm.adityajain2162.ksdns.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - vm.adityajain2162.ksdns.io
+      secretName: tls-secret
