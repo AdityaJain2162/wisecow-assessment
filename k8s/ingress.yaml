@@ -3,17 +3,21 @@ kind: Ingress
 metadata:
   name: wisecow-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
 spec:
-  ingressClassName: nginx
+  tls:
+    - hosts:
+        - vm.adityajain2162.ksdns.io
+      secretName: wisecow-tls
   rules:
-  - host: vm.adityajain2162.ksdns.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wisecow-service
-            port:
-              number: 80
+    - host: vm.adityajain2162.ksdns.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port:
+                  number: 80
