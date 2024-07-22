@@ -1,23 +1,21 @@
+# ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wisecow-ingress
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   tls:
-    - hosts:
-        - vm.adityajain2162.ksdns.io
-      secretName: wisecow-tls
+  - hosts:
+    - localhost
+    secretName: tls-secret
   rules:
-    - host: local.vm.adityajain2162.use1.kubegateway.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: wisecow-service
-                port:
-                  number: 80
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wisecow-service
+            port:
+              number: 80
