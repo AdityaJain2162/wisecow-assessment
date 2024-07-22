@@ -4,7 +4,7 @@ metadata:
   name: wisecow-ingress
 spec:
   rules:
-    - host: vm.adityajain2162.local.kubegateway.com
+    - host: localhost
       http:
         paths:
           - path: /
@@ -16,5 +16,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - vm.adityajain2162.ksdns.io
+        - localhost
       secretName: tls-secret
