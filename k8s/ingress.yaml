@@ -5,8 +5,9 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-  - host: local.vm.adityajain2162.use1.kubegateway.com
+  - host: vm.adityajain2162.ksdns.io
     http:
       paths:
       - path: /
