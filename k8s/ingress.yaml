@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: localhost.vm.adityajain2162.ksdns.io
+  - host: vm.adityajain2162.ksdns.io
     http:
       paths:
       - path: /
