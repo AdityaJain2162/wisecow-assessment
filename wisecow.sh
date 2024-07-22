@@ -19,9 +19,9 @@ handleRequest() {
 	mod=`fortune`
 
 cat <<EOF > $RSPFILE
-HTTP/1.1 200
-
-
+HTTP/1.1 200 OK\r
+Content-Type: text/html\r
+\r
 <pre>`cowsay $mod`</pre>
 EOF
 }
