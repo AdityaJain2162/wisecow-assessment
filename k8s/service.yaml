@@ -2,11 +2,18 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wisecow-service
-spec:
-  selector:
+  labels:
     app: wisecow
+spec:
   ports:
     - protocol: TCP
       port: 80
       targetPort: 4499
-  type: LoadBalancer
+  selector:
+    app: wisecow
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
